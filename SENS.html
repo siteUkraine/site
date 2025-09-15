@@ -1,0 +1,470 @@
+<html lang="uk" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENSEMAKER | Креативне агентство</title>
+    <meta name="description" content="Ми не продаємо ваш продукт. Ми розповідаємо вашу історію, через яку кожен захоче стати її частиною. SENSEMAKER — агентство, що створює бренди-легенди.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@600;800&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F8F6F2;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        h1, h2, h3, h4, .font-manrope {
+            font-family: 'Manrope', sans-serif;
+        }
+        .highlight-sense {
+            position: relative;
+            display: inline-block;
+        }
+        .highlight-sense::after {
+            content: '';
+            position: absolute;
+            bottom: 0.1em;
+            left: -0.2em;
+            right: -0.2em;
+            height: 0.4em;
+            background-color: #FF5B4D;
+            z-index: -1;
+            opacity: 0.8;
+            transition: height 0.3s ease;
+        }
+        .logo-container:hover .highlight-sense::after {
+            height: 0.2em;
+        }
+        .nav-link {
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FF5B4D;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .case-card:hover .case-overlay {
+            opacity: 1;
+        }
+        .case-card:hover .case-image {
+            transform: scale(1.05);
+        }
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .carousel-container {
+            -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+        }
+        .carousel {
+            display: flex;
+            animation: scroll 40s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.invisible{visibility:hidden}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.top-0{top:0px}.z-10{z-index:10}.z-50{z-index:50}.mx-12{margin-left:3rem;margin-right:3rem}.mx-auto{margin-left:auto;margin-right:auto}.mx-11{margin-left:2.75rem;margin-right:2.75rem}.mx-10{margin-left:2.5rem;margin-right:2.5rem}.mx-8{margin-left:2rem;margin-right:2rem}.mx-14{margin-left:3.5rem;margin-right:3.5rem}.mx-16{margin-left:4rem;margin-right:4rem}.mb-10{margin-bottom:2.5rem}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-4{margin-top:1rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.aspect-\[4\/5\]{aspect-ratio:4/5}.h-10{height:2.5rem}.h-12{height:3rem}.h-8{height:2rem}.h-full{height:100%}.min-h-screen{min-height:100vh}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.flex-shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.translate-y-4{--tw-translate-y:1rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-95{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.list-inside{list-style-position:inside}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-8{gap:2rem}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.scroll-smooth{scroll-behavior:smooth}.rounded-lg{border-radius:0.5rem}.bg-\[\#1A1A1A\]{--tw-bg-opacity:1;background-color:rgb(26 26 26 / var(--tw-bg-opacity, 1))}.bg-\[\#F8F6F2\]{--tw-bg-opacity:1;background-color:rgb(248 246 242 / var(--tw-bg-opacity, 1))}.bg-\[\#F8F6F2\]\/5{background-color:rgb(248 246 242 / 0.05)}.bg-\[\#F8F6F2\]\/80{background-color:rgb(248 246 242 / 0.8)}.bg-\[\#FF5B4D\]{--tw-bg-opacity:1;background-color:rgb(255 91 77 / var(--tw-bg-opacity, 1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-opacity-70{--tw-bg-opacity:0.7}.bg-gradient-to-t{background-image:linear-gradient(to top, var(--tw-gradient-stops))}.from-\[\#1A1A1A\]{--tw-gradient-from:#1A1A1A var(--tw-gradient-from-position);--tw-gradient-to:rgb(26 26 26 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-4{padding:1rem}.p-8{padding:2rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-12{padding-bottom:3rem}.pt-24{padding-top:6rem}.text-left{text-align:left}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-tighter{letter-spacing:-0.05em}.tracking-widest{letter-spacing:0.1em}.text-\[\#1A1A1A\]{--tw-text-opacity:1;color:rgb(26 26 26 / var(--tw-text-opacity, 1))}.text-\[\#1A1A1A\]\/50{color:rgb(26 26 26 / 0.5)}.text-\[\#1A1A1A\]\/60{color:rgb(26 26 26 / 0.6)}.text-\[\#1A1A1A\]\/80{color:rgb(26 26 26 / 0.8)}.text-\[\#F8F6F2\]{--tw-text-opacity:1;color:rgb(248 246 242 / var(--tw-text-opacity, 1))}.text-\[\#F8F6F2\]\/70{color:rgb(248 246 242 / 0.7)}.text-\[\#F8F6F2\]\/80{color:rgb(248 246 242 / 0.8)}.text-\[\#FF5B4D\]{--tw-text-opacity:1;color:rgb(255 91 77 / var(--tw-text-opacity, 1))}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.grayscale{--tw-grayscale:grayscale(100%);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-shadow{transition-property:box-shadow;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.duration-500{transition-duration:500ms}.hover\:bg-\[\#1A1A1A\]:hover{--tw-bg-opacity:1;background-color:rgb(26 26 26 / var(--tw-bg-opacity, 1))}.hover\:bg-\[\#FF5B4D\]:hover{--tw-bg-opacity:1;background-color:rgb(255 91 77 / var(--tw-bg-opacity, 1))}.hover\:text-\[\#1A1A1A\]:hover{--tw-text-opacity:1;color:rgb(26 26 26 / var(--tw-text-opacity, 1))}.hover\:text-\[\#F8F6F2\]:hover{--tw-text-opacity:1;color:rgb(248 246 242 / var(--tw-text-opacity, 1))}.hover\:grayscale-0:hover{--tw-grayscale:grayscale(0);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}@media (min-width: 768px){.md\:inline-block{display:inline-block}.md\:flex{display:flex}.md\:hidden{display:none}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:text-5xl{font-size:3rem;line-height:1}.md\:text-6xl{font-size:3.75rem;line-height:1}.md\:text-7xl{font-size:4.5rem;line-height:1}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:text-7xl{font-size:4.5rem;line-height:1}.lg\:text-8xl{font-size:6rem;line-height:1}}</style></head>
+<body class="antialiased">
+    <canvas id="bg-canvas" width="885" height="812" style="width: 885px; height: 812px;"></canvas>
+
+    <header id="header" class="bg-[#F8F6F2]/80 backdrop-blur-md p-4 fixed w-full top-0 z-50 transition-shadow duration-300 shadow-md">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="#hero" class="logo-container text-2xl font-extrabold tracking-tighter font-manrope">
+                <span class="highlight-sense">SENSE</span>MAKER
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link text-sm font-medium">Про нас</a>
+                <a href="#why-us" class="nav-link text-sm font-medium">Чому ми</a>
+                <a href="#services" class="nav-link text-sm font-medium">Послуги</a>
+                <a href="#cases" class="nav-link text-sm font-medium">Кейси</a>
+            </nav>
+            <a href="#contact" class="hidden md:inline-block text-sm font-bold bg-[#1A1A1A] text-[#F8F6F2] px-6 py-3 rounded-lg hover:bg-[#FF5B4D] hover:text-[#1A1A1A] transition-colors">
+                Зв'язатись
+            </a>
+            <button id="mobile-menu-btn" class="md:hidden text-2xl z-50">☰</button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#F8F6F2] mt-4">
+             <a href="#about" class="block text-center py-2 nav-link">Про нас</a>
+             <a href="#why-us" class="block text-center py-2 nav-link">Чому ми</a>
+             <a href="#services" class="block text-center py-2 nav-link">Послуги</a>
+             <a href="#cases" class="block text-center py-2 nav-link">Кейси</a>
+             <a href="#contact" class="block text-center py-4 font-bold text-[#FF5B4D]">Зв'язатись</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="min-h-screen flex items-center justify-center pt-24 pb-12 relative">
+            <div class="container mx-auto text-center px-4 z-10">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter mb-6">
+                    Ми не продаємо ваш продукт
+                </h1>
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-[#1A1A1A]/80 mb-10">
+                    Ми розповідаємо вашу історію, через яку кожен захоче стати її частиною
+                </h2>
+                <a href="#contact" class="inline-block text-lg font-bold bg-[#FF5B4D] text-[#1A1A1A] px-8 py-4 rounded-lg hover:bg-[#1A1A1A] hover:text-[#F8F6F2] transition-colors">
+                    Почати свою історію
+                </a>
+            </div>
+        </section>
+        
+        <section id="about" class="py-20">
+             <div class="container mx-auto px-4 text-center">
+                 <h2 class="text-4xl font-bold mb-4">Ми — SENSEMAKER</h2>
+                 <p class="max-w-3xl mx-auto text-xl text-[#1A1A1A]/80 leading-relaxed">Ми називаємось так, бо віримо: у світі, перенасиченому інформацією, перемагає не той, хто голосніше кричить, а той, чиї слова мають <span class="font-bold">сенс</span>. Наша робота — знайти цей сенс у вашому бренді, перетворити його на потужну історію та донести до сердець вашої аудиторії. Ми — архітектори комунікацій, які будують не просто впізнаваність, а справжню емоційну прив'язаність.</p>
+             </div>
+        </section>
+
+        <section id="why-us" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                     <h2 class="text-4xl font-bold mb-4">Чому саме ми</h2>
+                     <p class="max-w-2xl mx-auto text-[#1A1A1A]/80">Бо ми підходимо до вашого контенту свідомо. Ми не просто створюємо — ми досліджуємо.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Розкопуємо архетипи</h3>
+                        <p class="text-[#1A1A1A]/80">Ми занурюємось у психологію вашого бренду, щоб знайти його справжній характер. Це дозволяє говорити з аудиторією універсальною мовою, що викликає підсвідому довіру.</p>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Розуміємо вашу аудиторію</h3>
+                        <p class="text-[#1A1A1A]/80">Ми не вгадуємо, а аналізуємо. Ми допомагаємо вам зрозуміти не просто "хто" ваш клієнт, а "чому" він ваш. Які його болі, мрії та цінності? Це ключ до створення контенту, який резонує.</p>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Будуємо екосистеми</h3>
+                        <p class="text-[#1A1A1A]/80">Ми не створюємо окремі ролики чи пости. Ми будуємо цілісні контентні екосистеми, де кожен елемент підсилює інший, створюючи потужний та послідовний образ вашого бренду.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 bg-[#1A1A1A] text-[#F8F6F2]">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4">Наші Послуги</h2>
+                    <p class="max-w-2xl mx-auto text-[#F8F6F2]/80">Чотири комплексних рішення для вашого бренду.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="service-card bg-[#F8F6F2]/5 p-8 rounded-lg flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 text-[#FF5B4D]">Іскра Бренду</h3>
+                        <p class="text-[#F8F6F2]/80 mb-4 flex-grow">Ідеальний старт для нового бізнесу. Ми створимо візуальний стиль, розробимо креативи для запуску та напишемо історію, з якої почнеться ваша легенда.</p>
+                        <button data-modal="modal-spark" class="service-modal-trigger font-semibold text-left w-full mt-4 text-[#FF5B4D]">Дізнатись більше →</button>
+                    </div>
+                    <div class="service-card bg-[#F8F6F2]/5 p-8 rounded-lg flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 text-[#FF5B4D]">Візуальний Магніт</h3>
+                        <p class="text-[#F8F6F2]/80 mb-4 flex-grow">Перетворимо ваші соцмережі на магніт для клієнтів. Розробимо контент-план та створимо серію Reels/постів, що будуть працювати на вас.</p>
+                        <button data-modal="modal-magnet" class="service-modal-trigger font-semibold text-left w-full mt-4 text-[#FF5B4D]">Дізнатись більше →</button>
+                    </div>
+                    <div class="service-card bg-[#F8F6F2]/5 p-8 rounded-lg flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 text-[#FF5B4D]">Академія Бренду</h3>
+                        <p class="text-[#F8F6F2]/80 mb-4 flex-grow">Запустимо ваш YouTube-канал або освітній проект. Від стратегії та сценаріїв до професійної зйомки та монтажу.</p>
+                        <button data-modal="modal-academy" class="service-modal-trigger font-semibold text-left w-full mt-4 text-[#FF5B4D]">Дізнатись більше →</button>
+                    </div>
+                    <div class="service-card bg-[#F8F6F2]/5 p-8 rounded-lg flex flex-col">
+                        <h3 class="text-2xl font-bold mb-3 text-[#FF5B4D]">Код Впливу</h3>
+                        <p class="text-[#F8F6F2]/80 mb-4 flex-grow">Для тих, хто готовий до великих змін. Повноцінна комунікаційна стратегія та бренд-платформа, що стане вашим компасом на роки вперед.</p>
+                        <button data-modal="modal-code" class="service-modal-trigger font-semibold text-left w-full mt-4 text-[#FF5B4D]">Дізнатись більше →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cases" class="py-20">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4">Історії, які ми розповіли</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <a href="#" class="case-card block relative rounded-lg overflow-hidden shadow-lg group aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&amp;w=1974&amp;auto=format&amp;fit=crop" alt="Ресторан" class="case-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="case-overlay absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent opacity-0 transition-opacity duration-500 flex items-end p-8">
+                            <div class="case-title text-[#F8F6F2] transform translate-y-4 transition-transform duration-500">
+                                <p class="text-sm text-[#FF5B4D]">Брендинг</p>
+                                <h3 class="text-2xl font-bold">Ресторан "Gastro Roots"</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="case-card block relative rounded-lg overflow-hidden shadow-lg group aspect-[4/5]">
+                        <img src="https://cdn.cases.media/image/wide/41462dd0-9400-49ec-a558-f4d7076a6864.jpg" alt="YouTube канал" class="case-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="case-overlay absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent opacity-0 transition-opacity duration-500 flex items-end p-8">
+                            <div class="case-title text-[#F8F6F2] transform translate-y-4 transition-transform duration-500">
+                                <p class="text-sm text-[#FF5B4D]">YouTube</p>
+                                <h3 class="text-2xl font-bold">Освітній канал "Tech Unpacked"</h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="case-card block relative rounded-lg overflow-hidden shadow-lg group aspect-[4/5]">
+                        <img src="https://torgsoft.ua/assets/images/blog/1-barista-torgsoft.jpg" alt="Кав'ярня" class="case-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="case-overlay absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent opacity-0 transition-opacity duration-500 flex items-end p-8">
+                            <div class="case-title text-[#F8F6F2] transform translate-y-4 transition-transform duration-500">
+                                <p class="text-sm text-[#FF5B4D]">SMM</p>
+                                <h3 class="text-2xl font-bold">Кав'ярня "The Grind"</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="clients" class="py-12 bg-white">
+            <div class="container mx-auto">
+                <h4 class="text-center text-sm font-bold uppercase tracking-widest text-[#1A1A1A]/50 mb-8">Нам довіряють</h4>
+                <div class="carousel-container w-full overflow-hidden">
+                    <div class="carousel">
+                        <div class="flex items-center justify-around w-full flex-shrink-0">
+                             <img src="https://shop.novaposhta.ua/img/og_logo_shop.png" alt="Nova Poshta logo" class="h-10 mx-12 filter grayscale hover:grayscale-0 transition-filter">
+                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuxmMKHE4mrV45NF6-3UEbds0A5innDQs8Ww&amp;s" alt="Monobank logo" class="h-10 mx-12 filter grayscale hover:grayscale-0 transition-filter">
+                             <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Nova_Poshta_2022_logo.png" alt="Diia logo" class="h-8 mx-12 filter grayscale hover:grayscale-0 transition-filter">
+                             <img src="https://allretail.ua/static/files/originals/2/0c/81ef94822fc56477bd777a767f47e0c2.svg" alt="Silpo logo" class="h-12 mx-12 filter grayscale hover:grayscale-0 transition-filter">
+                             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Dtek-logo.png" alt="DTEK logo" class="h-8 mx-12 filter grayscale hover:grayscale-0 transition-filter">
+                        </div>
+                        <div class="flex items-center justify-around w-full flex-shrink-0">
+                             
+                             <img src="https://covers.easyweek.io/?title=monobank&amp;background=%238358f0&amp;color=%23ffffff&amp;logo=https%3A%2F%2Fstorage2.easyweek.io%2Fintegrations%2Fmonobank.png" alt="Monobank logo" class="h-10 mx-16 filter grayscale hover:grayscale-0 transition-filter">
+                             <img src="https://forbes.ua/static/storage/thumbs/1200x630/0/4e/b24e4990-bdf184edd87332cbe1aaeed54fbcf4e0.jpg?v=8794_1" alt="Diia logo" class="h-8 mx-12 filter grayscale hover:grayscale-0 transition-filter">
+                             <img src="http://googleusercontent.com/file_content/5" alt="Silpo logo" class="h-12 mx-12 filter grayscale hover:grayscale-0 transition-filter">
+                             <img src="http://googleusercontent.com/file_content/4" alt="DTEK logo" class="h-8 mx-12 filter grayscale hover:grayscale-0 transition-filter">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="py-20 bg-[#1A1A1A] text-[#F8F6F2]">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4">Наша подорож</h2>
+                    <p class="max-w-2xl mx-auto text-[#F8F6F2]/80">Від першої ідеї до вимірюваного результату.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-4xl font-extrabold text-[#FF5B4D] mb-2">01</div>
+                        <h4 class="text-xl font-bold mb-2">Занурення та Сенси</h4>
+                        <p class="text-[#F8F6F2]/70">Спільний воркшоп, де ми розкопуємо ДНК вашого бренду та визначаємо цілі.</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-extrabold text-[#FF5B4D] mb-2">02</div>
+                        <h4 class="text-xl font-bold mb-2">Архітектура Стратегії</h4>
+                        <p class="text-[#F8F6F2]/70">Будуємо креслення вашого успіху: детальний план дій, креативна концепція та KPI.</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-extrabold text-[#FF5B4D] mb-2">03</div>
+                        <h4 class="text-xl font-bold mb-2">Створення Історій</h4>
+                        <p class="text-[#F8F6F2]/70">Магія починається тут. Наша команда перетворює стратегію на контент, що захоплює.</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-extrabold text-[#FF5B4D] mb-2">04</div>
+                        <h4 class="text-xl font-bold mb-2">Зростання та Аналітика</h4>
+                        <p class="text-[#F8F6F2]/70">Запускаємо, вимірюємо, оптимізуємо. Ми працюємо циклами, щоб постійно покращувати результат.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-4 text-center">
+                 <h2 class="text-4xl md:text-5xl font-bold mb-4">Чи вартий ваш бренд мільярда?</h2>
+                 <p class="max-w-2xl mx-auto text-[#1A1A1A]/80 mb-10 text-xl">Ми віримо, що так. І ми допоможемо світу побачити його справжню цінність. Давайте почнемо цю розмову.</p>
+                 <a href="mailto:hello@sensemaker.agency" class="inline-block text-lg font-bold bg-[#1A1A1A] text-[#F8F6F2] px-10 py-4 rounded-lg hover:bg-[#FF5B4D] hover:text-[#1A1A1A] transition-colors">
+                    hello@sensemaker.agency
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 bg-[#F8F6F2]">
+        <div class="container mx-auto text-center text-[#1A1A1A]/60">
+            <a href="#hero" class="logo-container text-2xl font-extrabold tracking-tighter font-manrope text-[#1A1A1A] mb-2 inline-block">
+                <span class="highlight-sense">SENSE</span>MAKER
+            </a>
+            <p>Створюємо сенси, що працюють. © 2025</p>
+        </div>
+    </footer>
+    
+    <!-- Modals -->
+    <div id="modal-spark" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 invisible">
+        <div class="modal-content bg-white text-black rounded-lg p-8 max-w-2xl w-full transform scale-95">
+            <h3 class="text-3xl font-bold mb-4 text-[#FF5B4D]">Пакет "Іскра Бренду"</h3>
+            <p class="mb-6">Все, що потрібно для потужного старту. Ми не просто малюємо логотип, ми створюємо візуальну мову та історію, яка одразу заявить про вас.</p>
+            <ul class="list-disc list-inside space-y-2 mb-6">
+                <li>Розробка візуального стилю (логотип, кольори, шрифти)</li>
+                <li>Створення креативів для запуску (3-5 віжуалів для соцмереж)</li>
+                <li>Написання маніфесту бренду</li>
+                <li>Консультація по позиціонуванню</li>
+            </ul>
+            <button class="modal-close-btn bg-black text-white px-6 py-2 rounded-lg">Закрити</button>
+        </div>
+    </div>
+    <div id="modal-magnet" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 invisible">
+        <div class="modal-content bg-white text-black rounded-lg p-8 max-w-2xl w-full transform scale-95">
+            <h3 class="text-3xl font-bold mb-4 text-[#FF5B4D]">Пакет "Візуальний Магніт"</h3>
+            <p class="mb-6">Системний підхід до ваших соцмереж. Ми розробимо стратегію та створимо контент, який буде притягувати, а не просто існувати в стрічці.</p>
+            <ul class="list-disc list-inside space-y-2 mb-6">
+                <li>Розробка контент-стратегії для соцмереж на місяць</li>
+                <li>Створення візуальної сітки (9-12 постів)</li>
+                <li>Продакшн серії з 4-6 Reels (сценарій, зйомка, монтаж)</li>
+                <li>Написання текстів для постів</li>
+            </ul>
+            <button class="modal-close-btn bg-black text-white px-6 py-2 rounded-lg">Закрити</button>
+        </div>
+    </div>
+    <div id="modal-academy" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 invisible">
+        <div class="modal-content bg-white text-black rounded-lg p-8 max-w-2xl w-full transform scale-95">
+            <h3 class="text-3xl font-bold mb-4 text-[#FF5B4D]">Пакет "Академія Бренду"</h3>
+            <p class="mb-6">Перетворіть вашу експертизу на освітній продукт, що будує довіру та авторитет. Ідеально для YouTube, онлайн-курсів чи корпоративного навчання.</p>
+            <ul class="list-disc list-inside space-y-2 mb-6">
+                <li>Розробка концепції та структури YouTube-каналу/курсу</li>
+                <li>Написання сценаріїв для 3-5 відео</li>
+                <li>Організація та проведення зйомки</li>
+                <li>Професійний монтаж та графіка</li>
+            </ul>
+            <button class="modal-close-btn bg-black text-white px-6 py-2 rounded-lg">Закрити</button>
+        </div>
+    </div>
+    <div id="modal-code" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 invisible">
+        <div class="modal-content bg-white text-black rounded-lg p-8 max-w-2xl w-full transform scale-95">
+            <h3 class="text-3xl font-bold mb-4 text-[#FF5B4D]">Пакет "Код Впливу"</h3>
+            <p class="mb-6">Глибока стратегічна робота для брендів, що прагнуть лідерства. Ми створимо комунікаційну систему, яка буде працювати на вас роками.</p>
+            <ul class="list-disc list-inside space-y-2 mb-6">
+                <li>Дослідження ринку, аудиторії та конкурентів</li>
+                <li>Розробка бренд-платформи (місія, візія, цінності, архетип)</li>
+                <li>Побудова повноцінної комунікаційної стратегії</li>
+                <li>Створення гайдлайну по голосу та тону бренду (Tone of Voice)</li>
+            </ul>
+            <button class="modal-close-btn bg-black text-white px-6 py-2 rounded-lg">Закрити</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+            });
+
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && e.target !== mobileMenuBtn) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+            const navLinks = document.querySelectorAll('#mobile-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 3D Background
+            try {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+
+                const geometry = new THREE.IcosahedronGeometry(1, 0);
+                const material = new THREE.MeshBasicMaterial({ color: 0xFF5B4D, wireframe: true, transparent: true, opacity: 0.15 });
+                const sphere = new THREE.Mesh(geometry, material);
+                scene.add(sphere);
+
+                camera.position.z = 2.5;
+
+                const animate = function () {
+                    requestAnimationFrame(animate);
+                    sphere.rotation.x += 0.0005;
+                    sphere.rotation.y += 0.0005;
+                    renderer.render(scene, camera);
+                };
+                animate();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            } catch (e) {
+                console.error("3D background initialization failed:", e);
+            }
+
+            // Modals Logic
+            const modalTriggers = document.querySelectorAll('.service-modal-trigger');
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const modalId = trigger.dataset.modal;
+                    const modal = document.getElementById(modalId);
+                    const modalContent = modal.querySelector('.modal-content');
+                    modal.classList.remove('invisible', 'opacity-0');
+                    modalContent.classList.remove('scale-95');
+                });
+            });
+
+            const modalCloseBtns = document.querySelectorAll('.modal-close-btn');
+            modalCloseBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const modal = btn.closest('.modal');
+                    const modalContent = modal.querySelector('.modal-content');
+                    modalContent.classList.add('scale-95');
+                    modal.classList.add('opacity-0');
+                    setTimeout(() => modal.classList.add('invisible'), 300);
+                });
+            });
+            
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        const modalContent = modal.querySelector('.modal-content');
+                        modalContent.classList.add('scale-95');
+                        modal.classList.add('opacity-0');
+                        setTimeout(() => modal.classList.add('invisible'), 300);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body></html>
